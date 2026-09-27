@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marwan Tarek — Aspiring Penetration Tester</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0d0f; --bg-alt:#12161a; --text:#e8e6e1; --text-dim:#8b9198;
+    --accent:#ff9f1c; --accent-2:#3ddc97; --border:rgba(255,255,255,.09);
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg:#f6f5f2; --bg-alt:#ebe9e4; --text:#1a1d1f; --text-dim:#5b6167;
+      --border:rgba(0,0,0,.09);
+    }
+  }
+  :root[data-theme="dark"]{ --bg:#0b0d0f; --bg-alt:#12161a; --text:#e8e6e1; --text-dim:#8b9198; --border:rgba(255,255,255,.09); }
+  html{ scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth; }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:'JetBrains Mono',ui-monospace,monospace; }
+  a{ color:var(--accent); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  ::selection{ background:var(--accent); color:#0b0d0f; }
+
+  nav{
+    position:sticky; top:0; padding-top:env(safe-area-inset-top,0px);
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(8px); border-bottom:1px solid var(--border);
+    z-index:10;
+  }
+  .nav-inner{
+    max-width:760px; margin:0 auto; padding:14px 24px;
+    display:flex; justify-content:space-between; align-items:center;
+    overflow-x:auto; gap:20px; white-space:nowrap;
+  }
+  .nav-inner .brand{ font-weight:700; color:var(--text); }
+  .nav-inner .links{ display:flex; gap:18px; font-size:.85rem; }
+  .nav-inner .links a{ color:var(--text-dim); }
+  .nav-inner .links a:hover{ color:var(--accent); }
+
+  main{ max-width:760px; margin:0 auto; padding:0 24px; }
+  section{ padding:56px 0; border-bottom:1px solid var(--border); }
+  section:last-of-type{ border-bottom:none; }
+  .prompt{ color:var(--accent); }
+  h2.cmd{ font-size:.95rem; font-weight:500; color:var(--text-dim); margin-bottom:22px; }
+  h2.cmd .prompt{ margin-right:6px; }
+
+  .hero{ padding-top:64px; }
+  .hero .prompt-line{ font-size:1rem; color:var(--text-dim); margin-bottom:10px; }
+  .hero h1{
+    font-family:'JetBrains Mono',monospace; font-size:clamp(1.9rem,6vw,2.8rem);
+    font-weight:700; letter-spacing:-.01em; margin-bottom:8px;
+  }
+  .cursor{ display:inline-block; width:.5em; background:var(--accent); animation:blink 1s step-end infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+  @media (prefers-reduced-motion:reduce){ .cursor{ animation:none; } }
+  .hero .role{ color:var(--accent); font-size:1.05rem; margin-bottom:18px; }
+  .hero p{ color:var(--text-dim); max-width:56ch; }
+  .hero-fade{ animation:fadeUp .5s ease-out both; }
+  @media (prefers-reduced-motion:reduce){ .hero-fade{ animation:none; } }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(8px);} to{ opacity:1; transform:none;} }
+
+  ul.list{ list-style:none; }
+  ul.list li{
+    display:flex; justify-content:space-between; gap:16px;
+    padding:10px 0; border-bottom:1px dashed var(--border); font-size:.95rem;
+  }
+  ul.list li:last-child{ border-bottom:none; }
+  .tag{
+    font-family:'JetBrains Mono',monospace; font-size:.72rem; white-space:nowrap;
+    padding:2px 8px; border-radius:3px; height:fit-content; align-self:center;
+  }
+  .tag.done{ background:color-mix(in srgb, var(--accent-2) 18%, transparent); color:var(--accent-2); }
+  .tag.wip{ background:color-mix(in srgb, var(--accent) 18%, transparent); color:var(--accent); }
+
+  .hero-flex{ display:flex; align-items:center; gap:26px; flex-wrap:wrap; }
+  .avatar{
+    width:104px; height:104px; border-radius:50%; object-fit:cover;
+    object-position:50% 22%; border:2px solid var(--accent); flex-shrink:0;
+  }
+  .hero-text{ min-width:240px; flex:1; }
+
+  .cert-card{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
+    padding:14px 16px; margin-bottom:10px; border-radius:8px;
+    background:var(--bg-alt); border:1px solid var(--border);
+  }
+  .cert-card:last-child{ margin-bottom:0; }
+  .cert-main{ display:flex; flex-direction:column; gap:3px; }
+  .cert-title{ font-size:.95rem; }
+  .cert-meta{ font-size:.76rem; color:var(--text-dim); font-family:'JetBrains Mono',monospace; }
+
+  .skills-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:520px){ .skills-grid{ grid-template-columns:1fr; } }
+  .skill-block h3{ font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--text); margin-bottom:6px; }
+  .skill-block p{ color:var(--text-dim); font-size:.9rem; }
+  .placeholder{ color:var(--text-dim); font-style:italic; }
+
+  .edu p{ color:var(--text-dim); }
+  .edu strong{ color:var(--text); font-weight:600; }
+
+  .contact-links{ display:flex; flex-direction:column; gap:10px; font-family:'JetBrains Mono',monospace; font-size:.95rem; }
+  .contact-links span{ color:var(--text-dim); }
+
+  footer{ padding:28px 24px 40px; text-align:center; color:var(--text-dim); font-size:.8rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner mono">
+    <span class="brand">marwan.tarek</span>
+    <div class="links">
+      <a href="#about">about</a>
+      <a href="#certs">certs</a>
+      <a href="#skills">skills</a>
+      <a href="#labs">labs</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <section class="hero hero-fade">
+    <div class="prompt-line mono"><span class="prompt">$</span> whoami</div>
+    <div class="hero-flex">
+      <img class="avatar" src="data:image/jpeg;base64,<YOUR_BASE64_IMAGE_DATA_HERE>" alt="Marwan Tarek">
+      <div class="hero-text">
+        <h1>Marwan Tarek<span class="cursor">&nbsp;</span></h1>
+        <div class="role mono">Aspiring Penetration Tester</div>
+        <p>Communication Engineering student building a career in offensive security through the DEPI Penetration Testing Track — focused on network and Active Directory attacks, with hands-on lab experience.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="cmd mono"><span class="prompt">$</span> cat about.txt</h2>
+    <p style="max-width:60ch">Currently studying for the eJPT v2 certification while working through the DEPI Penetration Testing Track. Comes from a Communication Engineering background and has completed NTI training in network infrastructure and Linux administration — the foundation now being applied to offensive security labs.</p>
+  </section>
+
+  <section id="certs">
+    <h2 class="cmd mono"><span class="prompt">$</span> cat certifications.log</h2>
+    <div class="cert-card">
+      <div class="cert-main"><span class="cert-title">DEPI Penetration Testing Track</span></div>
+      <span class="tag wip">in progress</span>
+    </div>
+    <div class="cert-card">
+      <div class="cert-main"><span class="cert-title">eJPT v2 — eLearnSecurity Junior Penetration Tester</span></div>
+      <span class="tag wip">studying</span>
+    </div>
+    <div class="cert-card">
+      <div class="cert-main">
+        <span class="cert-title">Sprints — Cybersecurity Fundamentals</span>
+        <span class="cert-meta">Credential ID: SPR-TK747P</span>
+      </div>
+      <span class="tag done">completed</span>
+    </div>
+    <div class="cert-card">
+      <div class="cert-main">
+        <span class="cert-title">NTI × ITIDA — Network Infrastructure</span>
+        <span class="cert-meta">120 hrs · 94% score · Aug 2025</span>
+      </div>
+      <span class="tag done">completed</span>
+    </div>
+    <div class="cert-card">
+      <div class="cert-main">
+        <span class="cert-title">NTI — Linux Administration</span>
+        <span class="cert-meta">72 hrs · 90% score · Oct–Nov 2025</span>
+      </div>
+      <span class="tag done">completed</span>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="cmd mono"><span class="prompt">$</span> ls skills/</h2>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <h3>network-attacks/</h3>
+        <p>Reconnaissance, scanning, and exploitation of network services and misconfigurations.</p>
+      </div>
+      <div class="skill-block">
+        <h3>active-directory/</h3>
+        <p>Enumeration, privilege escalation, lateral movement, common AD attack paths.</p>
+      </div>
+      <div class="skill-block">
+        <h3>linux-administration/</h3>
+        <p>System configuration, user &amp; permission management, shell usage.</p>
+      </div>
+      <div class="skill-block">
+        <h3>tools/</h3>
+        <p>Nmap, Metasploit, NetExec (nxc), Netcat, Wireshark, Shodan</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="labs">
+    <h2 class="cmd mono"><span class="prompt">$</span> cat labs/*.md</h2>
+    <ul class="list">
+      <li><span>Active Directory attack labs — enumeration through domain compromise</span></li>
+      <li><span>Blue-team / defensive exercises alongside offensive labs</span></li>
+      <li><span class="placeholder">edit: add specific HTB / TryHackMe box write-ups once ready</span></li>
+    </ul>
+  </section>
+
+  <section class="edu">
+    <h2 class="cmd mono"><span class="prompt">$</span> cat education.txt</h2>
+    <p><strong>B.Sc. in Communication Engineering</strong></p>
+    <p class="placeholder">Al Shorouk Academy — [expected graduation year]</p>
+  </section>
+
+  <section id="contact">
+    <h2 class="cmd mono"><span class="prompt">$</span> contact --send</h2>
+    <div class="contact-links">
+      <div><span>email &nbsp;</span><a href="mailto:marawantarek71@gmail.com">marawantarek71@gmail.com</a></div>
+      <div><span>linkedin</span><a href="https://www.linkedin.com/in/marwan-tarek1" target="_blank" rel="noopener">linkedin.com/in/marwan-tarek1</a></div>
+      <div><span>github &nbsp;</span><a href="https://github.com/Marwan608" target="_blank" rel="noopener">github.com/Marwan608</a></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2026 Marwan Tarek — built while learning to break things safely.</footer>
+
+</body>
+</html>
