@@ -112,6 +112,19 @@
   .contact-links{ display:flex; flex-direction:column; gap:10px; font-family:'JetBrains Mono',monospace; font-size:.95rem; }
   .contact-links span{ color:var(--text-dim); }
 
+  .service-card{
+    padding:16px 18px; margin-bottom:12px; border-radius:8px;
+    background:var(--bg-alt); border:1px solid var(--border);
+  }
+  .service-card:last-child{ margin-bottom:0; }
+  .service-card h3{ font-family:'JetBrains Mono',monospace; font-size:.9rem; margin-bottom:6px; }
+  .service-card p{ color:var(--text-dim); font-size:.9rem; }
+  .note{
+    margin-top:18px; padding:12px 16px; border-radius:8px; font-size:.84rem;
+    color:var(--text-dim); border:1px dashed var(--border);
+  }
+  .note .prompt{ font-family:'JetBrains Mono',monospace; }
+
   footer{ padding:28px 24px 40px; text-align:center; color:var(--text-dim); font-size:.8rem; }
 </style>
 </head>
@@ -124,6 +137,7 @@
       <a href="#about">about</a>
       <a href="#certs">certs</a>
       <a href="#skills">skills</a>
+      <a href="#services">services</a>
       <a href="#labs">labs</a>
       <a href="#contact">contact</a>
     </div>
@@ -139,7 +153,7 @@
       <div class="hero-text">
         <h1>Marwan Tarek<span class="cursor">&nbsp;</span></h1>
         <div class="role mono">Aspiring Penetration Tester</div>
-        <p>Communication Engineering student building a career in offensive security through the DEPI Penetration Testing Track — focused on network and Active Directory attacks, with hands-on lab experience.</p>
+        <p>Communication Engineering building a career in offensive security through the DEPI Penetration Testing Track — focused on network and Active Directory attacks, with hands-on lab experience.</p>
       </div>
     </div>
   </section>
@@ -204,19 +218,46 @@
     </div>
   </section>
 
+  <section id="services">
+    <h2 class="cmd mono"><span class="prompt">$</span> ls services/</h2>
+    <div class="service-card">
+      <h3>Network Vulnerability Scanning</h3>
+      <p>Scan a network with Nmap to identify open ports, running services, and misconfigurations, with a report summarizing findings and risk levels.</p>
+    </div>
+    <div class="service-card">
+      <h3>Active Directory Security Assessment (lab environment)</h3>
+      <p>Enumeration, privilege escalation, and lateral movement testing in a test/lab AD environment, with a report explaining the attack path and how to close it.</p>
+    </div>
+    <div class="service-card">
+      <h3>OSINT Reconnaissance (Shodan)</h3>
+      <p>Identify internet-exposed devices and services tied to a domain or IP range, flagging default configurations and outdated systems.</p>
+    </div>
+    <div class="service-card">
+      <h3>Network Traffic Analysis</h3>
+      <p>Capture and analyze traffic with Wireshark to flag suspicious activity or help diagnose basic network security issues.</p>
+    </div>
+    <div class="service-card">
+      <h3>Cybersecurity Fundamentals Consulting</h3>
+      <p>Practical guidance for small networks or websites — explaining common vulnerabilities in plain terms and how to mitigate them.</p>
+    </div>
+    <div class="note mono">
+      <span class="prompt">note:</span> services are currently offered as lab-based / foundational assessments rather than full production penetration tests — scope is agreed and disclosed up front.
+    </div>
+  </section>
+
   <section id="labs">
     <h2 class="cmd mono"><span class="prompt">$</span> cat labs/*.md</h2>
     <ul class="list">
       <li><span>Active Directory attack labs — enumeration through domain compromise</span></li>
       <li><span>Blue-team / defensive exercises alongside offensive labs</span></li>
-      <li><span class="placeholder">edit: add specific HTB / TryHackMe box write-ups once ready</span></li>
+      <li><span class="placeholder">Write-ups of specific HTB / TryHackMe machines — coming soon</span></li>
     </ul>
   </section>
 
   <section class="edu">
     <h2 class="cmd mono"><span class="prompt">$</span> cat education.txt</h2>
     <p><strong>B.Sc. in Communication Engineering</strong></p>
-    <p class="placeholder">Al Shorouk Academy — [expected graduation year]</p>
+    <p class="placeholder">Al Shorouk Academy — Expected graduation 2028</p>
   </section>
 
   <section id="contact">
